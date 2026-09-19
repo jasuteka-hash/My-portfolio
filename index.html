@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASUTEKA — Video Director &amp; Filmmaker</title>
+<meta name="description" content="Portfolio of a video director specializing in narrative films, commercials, music videos and branded content.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-alt: #111111;
+    --ink: #f2f0eb;
+    --ink-dim: #9a9890;
+    --line: rgba(242,240,235,0.12);
+    --accent: #d94f30;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  ul { list-style: none; }
+  section { position: relative; }
+
+  .wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 18px;
+    display: block;
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 28px 0;
+    transition: padding 0.4s var(--ease), background 0.4s var(--ease), border-color 0.4s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  .nav.scrolled {
+    padding: 16px 0;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(10px);
+    border-color: var(--line);
+  }
+  .nav .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
+  }
+  .logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    padding: 10px 22px;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .nav-cta:hover { border-color: var(--accent); background: rgba(217,79,48,0.1); }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .menu-toggle span {
+    width: 24px; height: 2px;
+    background: var(--ink);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    transform: translateY(-100%);
+    transition: transform 0.5s var(--ease);
+  }
+  .mobile-menu.open { transform: translateY(0); }
+  .mobile-menu a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    height: 100vh;
+    min-height: 640px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.75) 60%, var(--bg) 100%),
+      url('https://images.unsplash.com/photo-1500989145603-8e7ef71d639e?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat;
+  }
+  .hero-content { max-width: 900px; }
+  .hero .eyebrow { color: var(--ink-dim); }
+  .hero h1 {
+    font-size: clamp(3.2rem, 9vw, 7.5rem);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero p {
+    max-width: 480px;
+    color: var(--ink-dim);
+    font-size: 1.05rem;
+    margin-bottom: 44px;
+  }
+  .hero-actions { display: flex; gap: 20px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    transition: all 0.35s var(--ease);
+    border: 1px solid var(--ink);
+    cursor: pointer;
+  }
+  .btn-solid { background: var(--ink); color: var(--bg); }
+  .btn-solid:hover { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 40px; left: 32px;
+    display: flex; align-items: center; gap: 14px;
+    color: var(--ink-dim);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .scroll-cue .line {
+    width: 1px; height: 48px;
+    background: linear-gradient(var(--ink-dim), transparent);
+  }
+
+  /* ---------- Section heading ---------- */
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    margin-bottom: 64px;
+    flex-wrap: wrap;
+  }
+  .section-head h2 {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    text-transform: uppercase;
+  }
+  .section-head p {
+    max-width: 360px;
+    color: var(--ink-dim);
+    font-size: 0.95rem;
+  }
+
+  section.pad { padding: 140px 0; }
+
+  /* ---------- Reel ---------- */
+  .reel { background: var(--bg-alt); }
+  .reel-frame {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: #000;
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .reel-frame iframe {
+    width: 100%; height: 100%; border: 0;
+  }
+
+  /* ---------- Work grid ---------- */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+  }
+  .work-card {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    isolation: isolate;
+  }
+  .work-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.92) 100%);
+    transition: background 0.4s var(--ease);
+    z-index: 1;
+  }
+  .work-card img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.9s var(--ease);
+    z-index: 0;
+  }
+  .work-card:hover img { transform: scale(1.08); }
+  .work-card:hover::before { background: linear-gradient(180deg, rgba(10,10,10,0.05) 0%, rgba(10,10,10,0.85) 100%); }
+
+  .work-info {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 28px;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .work-info .meta {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .work-info h3 {
+    font-size: 1.7rem;
+    text-transform: uppercase;
+  }
+
+  .play-icon {
+    z-index: 2;
+    width: 56px; height: 56px;
+    border: 1px solid rgba(242,240,235,0.5);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .work-card:hover .play-icon { background: var(--accent); border-color: var(--accent); }
+  .play-icon svg { width: 14px; height: 14px; fill: var(--ink); margin-left: 2px; }
+
+  /* ---------- About ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-photo {
+    aspect-ratio: 4/5;
+    background: url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=1000') center/cover;
+    position: relative;
+  }
+  .about-photo::after {
+    content: '';
+    position: absolute; inset: 0;
+    border: 1px solid var(--line);
+    outline: 24px solid var(--bg);
+    outline-offset: -24px;
+  }
+  .about-text p { color: var(--ink-dim); margin-bottom: 20px; max-width: 520px; }
+  .skills {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    margin-top: 36px;
+  }
+  .skills span {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    padding: 10px 18px;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- Services ---------- */
+  .services { background: var(--bg-alt); }
+  .service-list { border-top: 1px solid var(--line); }
+  .service-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1.2fr;
+    gap: 40px;
+    align-items: center;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--line);
+    transition: padding-left 0.4s var(--ease);
+  }
+  .service-row:hover { padding-left: 16px; }
+  .service-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--ink-dim); }
+  .service-row h3 { font-size: 1.8rem; text-transform: uppercase; }
+  .service-row p { color: var(--ink-dim); font-size: 0.92rem; max-width: 480px; }
+
+  /* ---------- Contact ---------- */
+  .contact { text-align: center; }
+  .contact .eyebrow { text-align: center; }
+  .contact h2 {
+    font-size: clamp(2.6rem, 8vw, 5.8rem);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+  .contact-email {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    display: inline-block;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+    transition: color 0.3s, border-color 0.3s;
+    margin-bottom: 56px;
+  }
+  .contact-email:hover { color: var(--accent); border-color: var(--accent); }
+  .socials {
+    display: flex; justify-content: center; gap: 28px;
+    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  .socials a:hover { color: var(--ink); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 0;
+  }
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ---------- Modal ---------- */
+  .modal {
+    position: fixed; inset: 0;
+    background: rgba(10,10,10,0.94);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease);
+  }
+  .modal.open { opacity: 1; pointer-events: auto; }
+  .modal-inner {
+    width: 100%;
+    max-width: 1000px;
+    aspect-ratio: 16/9;
+    background: #000;
+    position: relative;
+  }
+  .modal-inner iframe { width: 100%; height: 100%; border: 0; }
+  .modal-close {
+    position: absolute;
+    top: -48px; right: 0;
+    background: none; border: none;
+    color: var(--ink);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .menu-toggle { display: flex; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .work-grid { grid-template-columns: 1fr; }
+    .service-row { grid-template-columns: 40px 1fr; }
+    .service-row p { grid-column: 2 / 3; }
+    section.pad { padding: 96px 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="logo">ASUTEKA<span>.</span></a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Start a Project</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#work">Work</a>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap hero-content">
+    <span class="eyebrow">Video Director &amp; Filmmaker</span>
+    <h1>Stories<br>told in <em>motion.</em></h1>
+    <p>I direct narrative-driven films, commercials and music videos — building visual worlds that carry a feeling from first frame to last.</p>
+    <div class="hero-actions">
+      <a href="#reel" class="btn btn-solid">Watch Reel</a>
+      <a href="#work" class="btn btn-ghost">See Selected Work</a>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span class="line"></span>
+    Scroll
+  </div>
+</header>
+
+<section class="reel pad" id="reel">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Showreel</span>
+        <h2>2025 Director's Reel</h2>
+      </div>
+      <p>A two-minute cut of recent commercial, narrative and music video work. Replace the embed below with your own reel link.</p>
+    </div>
+    <div class="reel-frame reveal">
+      <!-- Replace the src below with your own YouTube/Vimeo embed URL -->
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Director's Showreel" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Selected Work</span>
+        <h2>Recent Projects</h2>
+      </div>
+      <p>A mix of commercial, narrative and music video work. Click a project to preview it — swap in your own stills and links.</p>
+    </div>
+
+    <div class="work-grid">
+
+      <div class="work-card reveal" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&q=80&w=1200" alt="Film set with camera crew" loading="lazy">
+        <div class="work-info">
+          <div>
+            <span class="meta">Commercial · 2025</span>
+            <h3>Northbound</h3>
+          </div>
+          <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+      </div>
+
+      <div class="work-card reveal" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <img src="https://images.unsplash.com/photo-1500989145603-8e7ef71d639e?auto=format&fit=crop&q=80&w=1200" alt="Cinema camera on set" loading="lazy">
+        <div class="work-info">
+          <div>
+            <span class="meta">Music Video · 2024</span>
+            <h3>Static Bloom</h3>
+          </div>
+          <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+      </div>
+
+      <div class="work-card reveal" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <img src="https://images.unsplash.com/photo-1517602302552-471fe67acf66?auto=format&fit=crop&q=80&w=1200" alt="Director reviewing footage on monitor" loading="lazy">
+        <div class="work-info">
+          <div>
+            <span class="meta">Short Film · 2024</span>
+            <h3>Low Tide</h3>
+          </div>
+          <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+      </div>
+
+      <div class="work-card reveal" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&q=80&w=1200" alt="Cinematic landscape shot" loading="lazy">
+        <div class="work-info">
+          <div>
+            <span class="meta">Branded Content · 2023</span>
+            <h3>Field Notes</h3>
+          </div>
+          <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo reveal"></div>
+    <div class="about-text reveal">
+      <span class="eyebrow">About</span>
+      <h2 style="font-size: clamp(2rem, 4vw, 2.8rem); text-transform: uppercase; margin-bottom: 24px;">Direction with intent.</h2>
+      <p>I'm a video director working across commercial, narrative and music video formats. My focus is on building a clear visual language for every project — from concept and shot design through to the final color pass — so that every frame is doing something on purpose.</p>
+      <p>Over the past several years I've collaborated with brands, artists and independent producers to shape ideas into films that hold attention and leave an impression.</p>
+      <div class="skills">
+        <span>Concept &amp; Story</span>
+        <span>Shot Direction</span>
+        <span>Cinematography</span>
+        <span>Editing</span>
+        <span>Color Grading</span>
+        <span>Sound Design</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services pad" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Services</span>
+        <h2>How I Can Help</h2>
+      </div>
+      <p>From first treatment to final delivery, available for full direction or focused post-production support.</p>
+    </div>
+    <div class="service-list">
+      <div class="service-row reveal">
+        <span class="service-num">01</span>
+        <h3>Narrative Direction</h3>
+        <p>Full creative direction for short films and narrative pieces — treatment, casting guidance, shot lists and on-set direction.</p>
+      </div>
+      <div class="service-row reveal">
+        <span class="service-num">02</span>
+        <h3>Commercial &amp; Branded</h3>
+        <p>Concept-to-delivery direction for brand films and commercials, built around a clear campaign idea and visual identity.</p>
+      </div>
+      <div class="service-row reveal">
+        <span class="service-num">03</span>
+        <h3>Music Videos</h3>
+        <p>Treatment writing and direction for artists, translating a track into a visual world that matches its tone.</p>
+      </div>
+      <div class="service-row reveal">
+        <span class="service-num">04</span>
+        <h3>Post Supervision</h3>
+        <p>Editorial oversight, color direction and sound design guidance to bring a finished cut to its strongest version.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Contact</span>
+    <h2 class="reveal">Let's make<br>something.</h2>
+    <a href="mailto:hello@asuteka.com" class="contact-email reveal">hello@asuteka.com</a>
+    <div class="socials reveal">
+      <a href="#">Instagram</a>
+      <a href="#">Vimeo</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Asuteka. All rights reserved.</span>
+    <span>Video Direction &amp; Filmmaking</span>
+  </div>
+</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-inner">
+    <button class="modal-close" id="modalClose">Close ✕</button>
+    <iframe id="modalIframe" src="" title="Project video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+  // Sticky nav background
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Project modal
+  const modal = document.getElementById('modal');
+  const modalIframe = document.getElementById('modalIframe');
+  const modalClose = document.getElementById('modalClose');
+
+  document.querySelectorAll('.work-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const src = card.getAttribute('data-video');
+      modalIframe.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1';
+      modal.classList.add('open');
+    });
+  });
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modalIframe.src = '';
+  }
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
